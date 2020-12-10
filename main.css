@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+.score {
+    /* position: sticky; */
+    top: 0px;
+    
+}
+
+.start {
+    font-size: 2rem;
+    background-color: black;
+    color: white;
+}
+
+.container {
+    position: sticky;
+    display: grid;
+    border: 5px solid rgb(0, 0, 0);
+    width: 40vw;
+    height: 40vw;
+}
+
+div {
+    background-color: rgb(255, 255, 255);
+}
+
+.black {
+    background-color: black;
+}
+
+.ant {
+    background-color: red;
+}
