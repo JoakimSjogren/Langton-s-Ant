@@ -1,10 +1,13 @@
 const container = document.querySelector('.container');
 const score = document.querySelector(".score");
 const start = document.querySelector('.start');
+const speedText = document.querySelector('.speed');
 
 let boxes;
 
 let playing = false;
+let speed = 1000;
+let atomatic = true;
 
 let rowSize = 59;
 let size = rowSize * rowSize;
@@ -102,13 +105,25 @@ function moveAnt() {
     boxes[antInt].classList.add('ant');
     steps += 1;
     score.textContent = steps;
-    loop();
+    if (atomatic) {
+        loop();
+    }
 }
 function loop() {
     if (playing !== false) {
         setTimeout(function () {
             moveAnt();
-        }, 1);
+            console.log(speed);
+        }, speed);
+    }
+}
+
+function updateStartText() {
+    if (playing) {
+        start.textContent = "Pause";
+    }
+    else {
+        start.textContent = "Start";
     }
 }
 
@@ -118,14 +133,49 @@ calculateAnt();
 
 start.addEventListener('click', () => {
     playing = !playing;
-    if (playing) {
-        start.textContent = "Pause";
+    updateStartText();
+    loop();
+});
 
+container.addEventListener('click', () => {
+    if (!atomatic && playing) {
+        loop();
+    }
+});
+
+document.addEventListener('wheel', (e) => {
+    if (speed <= 5000 && speed >= 0) {
+        playing = false;
+        speed += e.deltaY;
+
+        if (speed > 5000) {
+            speed = 5000;
+        }
+        else if (speed < 0) {
+            speed = 0;
+        }
     }
     else {
-        start.textContent = "Start";
+        if (speed <= 5000) {
+            speed = 5000;
+        }
+        else if (speed >= 0) {
+            speed = 0;
+        }
     }
+    if (speed === 0) {
+        speedText.textContent = 50 + ' steps every second';
+    }
+    else {
+        let speedtxtInt = 1 / (speed / 1000);
+        speedtxtInt = parseFloat(speedtxtInt).toFixed(1);
+        // speedtxtInt = speedtxtInt(0, 3);
+        speedText.textContent = speedtxtInt + ' steps every second';
+        //console.info(str.substring(0,3));
+    }
+    updateStartText();
     loop();
+    return;
 });
 
 

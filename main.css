@@ -1,23 +1,51 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
 body {
     display: flex;
     justify-content: center;
-    height: 100vh;
+    height: 90vh;
     align-items: center;
     flex-direction: column;
 }
 
-
-
-.score {
-    /* position: sticky; */
-    top: 0px;
-    
+nav {
+    display: flex;
+    width: 40vw;
+    justify-content: space-between;
 }
 
-.start {
+.left-nav, .right-nav {
+    width: 15vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    justify-self: flex-start;
+}
+
+.speed, .place-holder {
+    justify-self: flex-end;
+    align-self: flex-end;
+    font-size: 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+.score {
+    justify-self: flex-end;
+    align-self: flex-end;
+    font-size: 2rem;
+    text-align: center;
+    width: 10vw;
+}
+
+.start, .atomatic {
     font-size: 2rem;
     background-color: black;
     color: white;
+    text-align: center;
 }
 
 .container {
