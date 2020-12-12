@@ -27,8 +27,8 @@ function createBoxes() {
     for (let rowIndex = 0; rowIndex < size; rowIndex++) {
         const newDiv = document.createElement('div');
         container.appendChild(newDiv);
-        newDiv.style.height = `${container.offsetWidth / rowSize}`;
-        newDiv.style.width = `${container.offsetWidth / rowSize}`;
+        newDiv.style.height = `${container.Width / rowSize}px`;
+        newDiv.style.width = `${container.Width / rowSize}px`;
     }
     boxes = container.querySelectorAll('div');
 }
