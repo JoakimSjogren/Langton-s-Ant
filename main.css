@@ -65,5 +65,5 @@ div {
 }
 
 .ant {
-    background-color: red;
+    background-color: var(--ant-color);
 }

@@ -144,33 +144,33 @@ container.addEventListener('click', () => {
 });
 
 document.addEventListener('wheel', (e) => {
-    if (speed <= 5000 && speed >= 0) {
+    if (speed <= 2500 && speed >= 0) {
         playing = false;
         speed += e.deltaY;
 
-        if (speed > 5000) {
-            speed = 5000;
+        if (speed > 2500) {
+            speed = 2500;
         }
         else if (speed < 0) {
             speed = 0;
         }
     }
     else {
-        if (speed <= 5000) {
-            speed = 5000;
+        if (speed <= 2500) {
+            speed = 2500;
         }
         else if (speed >= 0) {
             speed = 0;
         }
     }
     if (speed === 0) {
-        speedText.textContent = 50 + ' steps every second';
+        speedText.textContent = 'A lot of steps per second';
     }
     else {
         let speedtxtInt = 1 / (speed / 1000);
         speedtxtInt = parseFloat(speedtxtInt).toFixed(1);
         // speedtxtInt = speedtxtInt(0, 3);
-        speedText.textContent = speedtxtInt + ' steps every second';
+        speedText.textContent = speedtxtInt + ' steps per second';
         //console.info(str.substring(0,3));
     }
     updateStartText();
