@@ -9,7 +9,7 @@ let playing = false;
 let speed = 1000;
 let atomatic = true;
 
-let rowSize = 59;
+let rowSize = 61;
 let size = rowSize * rowSize;
 
 let prevColor = 0;
