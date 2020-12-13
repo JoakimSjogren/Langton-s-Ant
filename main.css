@@ -5,12 +5,20 @@
 :root {
     --ant-color: rgb(211, 31, 31);
   }
+
+@font-face {
+    font-family: 'main-font';
+    src: url(font/JetBrainsMono-Regular.woff);
+    src: url(font/JetBrainsMono-Regular.woff2);
+}
+
 body {
     display: flex;
     justify-content: center;
     height: 90vh;
     align-items: center;
     flex-direction: column;
+    font-family: 'main-font';
 }
 
 nav {
