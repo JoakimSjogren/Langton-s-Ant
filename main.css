@@ -2,7 +2,9 @@
     margin: 0px;
     padding: 0px;
 }
-
+:root {
+    --ant-color: rgb(211, 31, 31);
+  }
 body {
     display: flex;
     justify-content: center;

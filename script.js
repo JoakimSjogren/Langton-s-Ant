@@ -2,9 +2,9 @@ const container = document.querySelector('.container');
 const score = document.querySelector(".score");
 const start = document.querySelector('.start');
 const speedText = document.querySelector('.speed');
+const atomaticBtn = document.querySelector('.atomatic');
 
 let boxes;
-
 let playing = false;
 let speed = 1000;
 let atomatic = true;
@@ -113,7 +113,6 @@ function loop() {
     if (playing !== false) {
         setTimeout(function () {
             moveAnt();
-            console.log(speed);
         }, speed);
     }
 }
@@ -135,11 +134,25 @@ start.addEventListener('click', () => {
     playing = !playing;
     updateStartText();
     loop();
+    atomatic = true;
+    atomaticBtn.textContent = 'Atomatic';
 });
 
 container.addEventListener('click', () => {
-    if (!atomatic && playing) {
-        loop();
+    if (!atomatic) {
+        moveAnt();
+    }
+});
+
+atomaticBtn.addEventListener('click', () => {
+    atomatic = !atomatic;
+    if (atomatic) {
+        atomaticBtn.textContent = 'Atomatic';
+    }
+    else {
+        atomaticBtn.textContent = 'Manual';
+        playing = false;
+        updateStartText();
     }
 });
 
