@@ -16,6 +16,7 @@ let prevColor = 0;
 let steps = 0;
 let antInt = 0;
 let dir = 0;
+let mouseIsDown = false;
 
 function initialize() {
     container.style.gridTemplateRows = `repeat(${rowSize}, 1fr)`;
@@ -108,7 +109,17 @@ function moveAnt() {
     if (atomatic) {
         loop();
     }
+    if (mouseIsDown) {
+        mouseDownLoop();
+    }
 }
+
+function mouseDownLoop() {
+    setTimeout(function () {
+        moveAnt();
+    }, 1);
+}
+
 function loop() {
     if (playing !== false) {
         setTimeout(function () {
@@ -142,6 +153,21 @@ container.addEventListener('click', () => {
     if (!atomatic) {
         moveAnt();
     }
+});
+
+//Mouse Down
+container.addEventListener('mousedown', () => {
+    if (!atomatic) {
+        mouseIsDown = true;
+        setTimeout(function () {
+            if (mouseIsDown)
+                moveAnt();
+        }, 1000);
+    }
+});
+//Mouse Up
+document.addEventListener('mouseup', () => {
+    mouseIsDown = false;
 });
 
 atomaticBtn.addEventListener('click', () => {
