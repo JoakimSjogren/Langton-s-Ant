@@ -107,6 +107,7 @@ nav {
     color: white;
     text-align: center;
     margin-top: auto;
+    border: 2px solid rgb(104, 104, 104);
 }
 
 .start:hover, .atomatic:hover {
