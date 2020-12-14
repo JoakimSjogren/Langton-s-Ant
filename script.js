@@ -3,7 +3,6 @@ const score = document.querySelector(".score");
 const start = document.querySelector('.start');
 const speedText = document.querySelector('.speed');
 const atomaticBtn = document.querySelector('.atomatic');
-
 const leftArrow = document.querySelector('.left-arrow');
 const rightArrow = document.querySelector('.right-arrow');
 
@@ -12,16 +11,19 @@ let boxes;
 let playing = false;
 let speed = 1000;
 let atomatic = true;
-
-let rowSize = 61;
-let size = rowSize * rowSize;
-
 let prevColor = 0;
 let steps = 0;
 let antInt = 0;
 let dir = 0;
 let mouseIsDown = false;
 
+const minSpeed = 0;
+const maxSpeed = 2500;
+
+const rowSize = 61;
+const size = rowSize * rowSize;
+
+//Create Container
 function initialize() {
     container.style.gridTemplateRows = `repeat(${rowSize}, 1fr)`;
     container.style.gridTemplateColumns = `repeat(${rowSize}, 1fr)`;
@@ -62,8 +64,6 @@ function moveAnt() {
     boxes[antInt].classList.remove('ant');
     boxes[antInt].classList.toggle('black');
 
-
-
     //white square
     if (prevColor === 0) {
         if (dir === 0) {
@@ -94,6 +94,8 @@ function moveAnt() {
             dir = 2;
         }
     }
+
+    //Move ant
     if (dir === 0) {
         antInt -= rowSize;
     }
@@ -107,12 +109,15 @@ function moveAnt() {
         antInt -= 1;
     }
 
+    //Check square color
     if (boxes[antInt].classList.contains('black')) {
         prevColor = 1;
     }
     else {
         prevColor = 0;
     }
+
+    //change color of square
     boxes[antInt].classList.add('ant');
     steps += 1;
     score.textContent = steps;
@@ -148,25 +153,24 @@ function updateStartText() {
         start.classList.remove('pressed')
     }
 }
-//adjust speed
+//adjust stepping speed
 function adjustSpeed(speedAmount) {
-    if (speed <= 2500 && speed >= 0) {
+    if (speed <= minSpeed && speed >= maxSpeed) {
         playing = false;
         speed += speedAmount;
-
-        if (speed > 2500) {
-            speed = 2500;
+        if (speed > minSpeed) {
+            speed = minSpeed;
         }
-        else if (speed < 0) {
-            speed = 0;
+        else if (speed < maxSpeed) {
+            speed = maxSpeed;
         }
     }
     else {
-        if (speed <= 2500) {
-            speed = 2500;
+        if (speed <= minSpeed) {
+            speed = minSpeed;
         }
-        else if (speed >= 0) {
-            speed = 0;
+        else if (speed >= maxSpeed) {
+            speed = maxSpeed;
         }
     }
     if (speed === 0) {
@@ -175,9 +179,7 @@ function adjustSpeed(speedAmount) {
     else {
         let speedtxtInt = 1 / (speed / 1000);
         speedtxtInt = parseFloat(speedtxtInt).toFixed(1);
-        // speedtxtInt = speedtxtInt(0, 3);
         speedText.textContent = speedtxtInt + ' steps per second';
-        //console.info(str.substring(0,3));
     }
     updateStartText();
     loop();
@@ -202,7 +204,6 @@ container.addEventListener('click', () => {
     }
 });
 
-//Mouse Down
 container.addEventListener('mousedown', () => {
     if (!atomatic) {
         mouseIsDown = true;
@@ -212,7 +213,7 @@ container.addEventListener('mousedown', () => {
         }, 1000);
     }
 });
-//Mouse Up
+
 document.addEventListener('mouseup', () => {
     mouseIsDown = false;
 });
@@ -229,7 +230,7 @@ atomaticBtn.addEventListener('click', () => {
     }
 });
 
-//Detect mouse wheel
+//Detect mouse wheel to change speed value
 document.addEventListener('wheel', (e) => {
     adjustSpeed(e.deltaY);
 });
@@ -239,4 +240,3 @@ leftArrow.addEventListener('click', () => {
 rightArrow.addEventListener('click', () => {
     adjustSpeed(-100);
 });
-
