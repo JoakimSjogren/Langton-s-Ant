@@ -5,4 +5,29 @@
         width: 90vw;
         height: 90vw;
     }
+
+    .score {
+        font-size: 1.5rem;
+    }
+
+    .speed {
+        font-size: .6rem;
+    }
+
+    .arrow {
+        width: 25px;
+      height: 10px;
+    }
+    .start, .atomatic {
+        font-size: 1rem; 
+    }
+
+    nav {
+        width: 70vw;
+    }
+
+    .left-nav, .right-nav { 
+        width: 25vw;
+    }
+
 }

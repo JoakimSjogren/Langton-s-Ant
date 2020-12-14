@@ -4,6 +4,10 @@ const start = document.querySelector('.start');
 const speedText = document.querySelector('.speed');
 const atomaticBtn = document.querySelector('.atomatic');
 
+const leftArrow = document.querySelector('.left-arrow');
+const rightArrow = document.querySelector('.right-arrow');
+
+
 let boxes;
 let playing = false;
 let speed = 1000;
@@ -131,16 +135,53 @@ function loop() {
 function updateStartText() {
     if (playing) {
         start.textContent = "Pause";
+        start.classList.add('pressed')
     }
     else {
         start.textContent = "Start";
+        start.classList.remove('pressed')
     }
+}
+//adjust speed
+function adjustSpeed(speedAmount) {
+    if (speed <= 2500 && speed >= 0) {
+        playing = false;
+        speed += speedAmount;
+
+        if (speed > 2500) {
+            speed = 2500;
+        }
+        else if (speed < 0) {
+            speed = 0;
+        }
+    }
+    else {
+        if (speed <= 2500) {
+            speed = 2500;
+        }
+        else if (speed >= 0) {
+            speed = 0;
+        }
+    }
+    if (speed === 0) {
+        speedText.textContent = 'A lot of steps per second';
+    }
+    else {
+        let speedtxtInt = 1 / (speed / 1000);
+        speedtxtInt = parseFloat(speedtxtInt).toFixed(1);
+        // speedtxtInt = speedtxtInt(0, 3);
+        speedText.textContent = speedtxtInt + ' steps per second';
+        //console.info(str.substring(0,3));
+    }
+    updateStartText();
+    loop();
+    return;
 }
 
 initialize();
 calculateAnt();
 
-
+//Start/Pause
 start.addEventListener('click', () => {
     playing = !playing;
     updateStartText();
@@ -182,40 +223,14 @@ atomaticBtn.addEventListener('click', () => {
     }
 });
 
+//Detect mouse wheel
 document.addEventListener('wheel', (e) => {
-    if (speed <= 2500 && speed >= 0) {
-        playing = false;
-        speed += e.deltaY;
-
-        if (speed > 2500) {
-            speed = 2500;
-        }
-        else if (speed < 0) {
-            speed = 0;
-        }
-    }
-    else {
-        if (speed <= 2500) {
-            speed = 2500;
-        }
-        else if (speed >= 0) {
-            speed = 0;
-        }
-    }
-    if (speed === 0) {
-        speedText.textContent = 'A lot of steps per second';
-    }
-    else {
-        let speedtxtInt = 1 / (speed / 1000);
-        speedtxtInt = parseFloat(speedtxtInt).toFixed(1);
-        // speedtxtInt = speedtxtInt(0, 3);
-        speedText.textContent = speedtxtInt + ' steps per second';
-        //console.info(str.substring(0,3));
-    }
-    updateStartText();
-    loop();
-    return;
+    adjustSpeed(e.deltaY);
 });
-
-
+leftArrow.addEventListener('click', () => {
+    adjustSpeed(100);
+});
+rightArrow.addEventListener('click', () => {
+    adjustSpeed(-100);
+});
 
