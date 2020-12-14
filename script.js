@@ -55,6 +55,9 @@ function moveAnt() {
     if (steps === 10628) {
         return;
     }
+    if (!playing && atomatic) {
+        return;
+    }
 
     boxes[antInt].classList.remove('ant');
     boxes[antInt].classList.toggle('black');
