@@ -52,6 +52,9 @@ function calculateAnt() {
     }
 }
 function moveAnt() {
+    if (steps === 10628) {
+        return;
+    }
 
     boxes[antInt].classList.remove('ant');
     boxes[antInt].classList.toggle('black');
