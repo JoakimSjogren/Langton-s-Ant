@@ -17,8 +17,8 @@ let antInt = 0;
 let dir = 0;
 let mouseIsDown = false;
 
-const minSpeed = 0;
-const maxSpeed = 2500;
+const maxSpeed = 0;
+const minSpeed = 2500;
 
 const rowSize = 61;
 const size = rowSize * rowSize;
